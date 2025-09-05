@@ -82,8 +82,7 @@ Your tasks:
    - Identify the `SORT` and `READ TABLE` usage.
    - Ensure SORT BY fields match all READ TABLE WITH KEY fields (order and completeness).
    - Suggest corrected SORT statements.
-   - Require JSON output with keys: original_code_snippet, remediated_code_snippet, changes[].
-
+   
 Return ONLY strict JSON:
 {{
   "assessment": "<concise impact of mismatch between SORT and READ>",
