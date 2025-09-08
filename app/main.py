@@ -30,6 +30,7 @@ class ReadItem(BaseModel):
     used_fields: List[str]
     suggested_fields: List[str]
     suggested_statement: Optional[str] = None
+    snippet: Optional[str] = None
 
     @field_validator("used_fields", mode="before")
     @classmethod
@@ -62,8 +63,11 @@ def summarize_context(ctx: NoteContext) -> dict:
 
 
 # ---- LangChain Prompt ----
-SYSTEM_MSG = "You are a precise ABAP reviewer familiar with SAP performance note 1803189. Respond in strict JSON only."
-
+SYSTEM_MSG = """You are a precise ABAP reviewer familiar with SAP performance note 1803189. Respond in strict JSON only.
+You are evaluating a system context related to Read Statement. We provide:
+- system context
+- list of detected changes in code (with offending code snippets when available)
+"""
 USER_TEMPLATE = """
 You are evaluating ABAP code that uses `READ TABLE ... BINARY SEARCH` and `SORT` statements.
 
